@@ -6,29 +6,8 @@ library(hisse)
 library(diversitree)
 
 library(geiger)
-# Added by Brendan
-# This package enables you to get information from command line arguments
-library(optparse)
 
-# Added by Brendan
-# Set up the command line arguments and parse
-#
-# The usage for this will be (for example):
-#
-# HiSSE_0.66-0.46_Shuff_for_hpc.R --tree pw.caud.ultra.nexus \
-#   --states states.txt --char-states Caudate.PyronWiens.SppStates.csv \
-#   --output hisse.full_0.72_shuff.results.1 \
-#   --samp 0.72
-#
-# The states file should just be 1s and 0s, one per line
-#
-# TODO: I added an option (--samp) to input the sampling
-# frequency, which is stored as a variable called sample_freq. You
-# could put sample_freq everywhere you have the sampling frequency
-# hard-coded, and then you could use this script for different
-# sampling frequencies. There are a number of other places where I
-# saw parameters that could be set as command-line options, but I
-# wasn't quite sure what they were doing, so I left them alone.
+library(optparse)
 
 opts <- list(make_option('--tree'),
              make_option('--states'),
@@ -55,13 +34,8 @@ tree <- read.nexus(tree_file)
 dat <- read.csv(hisse_dat_file)
 
 
-#
-# Added by Brendan:
-#   All the following stuff was in a loop, but you are planning to
-#   do each run in a separate thread, so I got rid of the loop.
-#
-
-#Shuffle states for each i within the loop
+#Transition rates used here are those estimated for the 'hybridizability' trait along out phylogeny. 
+#We then simulate a neutral trait along the phylogeny. 
 q <- list(rbind(c(-0.002692059,0.002692059), c(0.037110456,-0.037110456)))
 sim.traits <- sim.char(tree, q, model='discrete', nsim = 1, root = 1)
 sim.traits <- as.data.frame(sim.traits)
