@@ -15,6 +15,7 @@ dat <- read.csv('./Caudata.PyronWiens.SppStates.csv')
 trans.rate <- TransMatMaker(hidden.states=TRUE)
 trans.rate[!is.na(trans.rate) & !trans.rate == 0] = 1
 
+# Start vals from here-on are those which produced the best final model using latin hyper-cube sampling. 
 start.vals <- c(0.0214445204,0.9218754317,0.7819032506)
 # Fixed turnover rates between 0A & 1A, and between 0B & 1B
 # This runs the analysis
