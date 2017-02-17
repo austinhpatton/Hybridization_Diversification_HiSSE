@@ -351,6 +351,5 @@ results <- as.data.frame(logL, row.names=c('Null2 AllTrans EqRates', 'Null2 NoDu
 results$AIC <- AIC
 results$AICc <- AICc
 
-# Brendan added:
 # Variable outfile name instead of hard-coded:
 write.csv(results, file=paste0(out_prefix, 'ModelSupport.csv'))
